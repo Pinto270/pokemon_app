@@ -60,7 +60,7 @@ class PokedexPage:
         Sortie
             si le Pokédex est initialisé
         """
-        st.header("Sélectionner une génération")
+        st.header("Sélectionner un Pokémon")
         gens_list = self.pokedex.generation.unique()
         gen = st.selectbox("Génération",options=gens_list,placeholder="Sélectionner une génération")
         self.pokemon_list = self.pokedex[self.pokedex.generation==gen].nom_fr.to_list()
