@@ -1,7 +1,10 @@
 import random
 import pandas as pd
 import streamlit as st
+from streamlit_js_eval import streamlit_js_eval
 
+
+window_width = streamlit_js_eval(js_expressions='window.innerWidth',default=704,key='WIDTH')
 
 @st.dialog("🎉 Nouveautés")
 def new_features(texte: str):
@@ -28,7 +31,10 @@ def image(df: pd.DataFrame):
     assert isinstance(df,pd.DataFrame), f"df doit être un DataFrame, pas {type(df)}"
     with st.container(horizontal=True):
         for i in random.sample(df.index.to_list(),k=3):
-            st.image(pokedex.loc[i,"sprite"],width=200)
+            if window_width<500:
+                st.image(pokedex.loc[i,"sprite"],width=100)
+            else:
+                st.image(pokedex.loc[i,"sprite"],width=200)
 
 st.set_page_config(page_title="Accueil",page_icon="🏠")
 
