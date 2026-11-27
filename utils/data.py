@@ -1,5 +1,6 @@
 import requests
 import pandas as pd
+import streamlit as st
 
 
 class CustomStructure:
@@ -15,6 +16,7 @@ class CustomStructure:
             return self.data[key]
 
 
+@st.cache_data(ttl=3600,max_entries=1000,show_spinner=False)
 def get_pokedex() -> pd.DataFrame:
     """
     Fonction qui récupère les données des Pokémons. 
@@ -87,6 +89,7 @@ def get_pokedex() -> pd.DataFrame:
         return None
 
 
+@st.cache_data(ttl=3600,max_entries=1000,show_spinner=False)
 def get_types() -> pd.DataFrame:
     """
     Fonction qui récupère les données des types. 
