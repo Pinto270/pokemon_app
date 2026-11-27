@@ -103,28 +103,26 @@ class PokedexPage:
             st.markdown("**Évolution**")
             evolutions = []
             if pokemon.pre_evolution==pokemon.pre_evolution:
-                pre_evolution = self.pokedex.loc[pokemon.pre_evolution]
-                if pre_evolution.pre_evolution==pre_evolution.pre_evolution:
-                    evolutions.append(int(pre_evolution.pre_evolution))
-                evolutions.append(int(pokemon.pre_evolution))
+                for i in pokemon.pre_evolution.split(", "):
+                    evolutions.append(int(i))
             evolutions.append(id)
             if pokemon.evolution==pokemon.evolution:
-                evolution = self.pokedex.loc[pokemon.evolution]
-                evolutions.append(int(pokemon.evolution))
-                if evolution.evolution==evolution.evolution:
-                    evolutions.append(int(evolution.evolution))
+                for i in pokemon.evolution.split(", "):
+                    evolutions.append(int(i))
             with st.container(horizontal=True):
                 if len(evolutions)==1:
                     st.text("Aucune lignée évolutive")
                 else:
                     col1, col2, col3 = st.columns(3)
                     with col1:
-                        st.image(self.pokedex.loc[evolutions[0],"sprite"],width=150)
+                        for i in range(0,len(evolutions),3):
+                            st.image(self.pokedex.loc[evolutions[i],"sprite"],width=150)
                     with col2:
-                        st.image(self.pokedex.loc[evolutions[1],"sprite"],width=150)
-                    if len(evolutions)==3:
-                        with col3:
-                            st.image(self.pokedex.loc[evolutions[2],"sprite"],width=150)
+                        for i in range(1,len(evolutions),3):
+                            st.image(self.pokedex.loc[evolutions[i],"sprite"],width=150)
+                    with col3:
+                        for i in range(2,len(evolutions),3):
+                            st.image(self.pokedex.loc[evolutions[i],"sprite"],width=150)
         st.text("")
         with st.container():
             st.markdown("**Statistiques**")
