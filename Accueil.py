@@ -25,6 +25,7 @@ def image(df: pd.DataFrame):
     Entrée
         df: données (images des Pokémons)
     """
+    assert isinstance(df,pd.DataFrame), f"df doit être un DataFrame, pas {type(df)}"
     with st.container(horizontal=True):
         for i in random.sample(df.index.to_list(),k=3):
             st.image(pokedex.loc[i,"sprite"],width=200)
@@ -32,7 +33,7 @@ def image(df: pd.DataFrame):
 st.set_page_config(page_title="Accueil",page_icon="🏠")
 
 if not ("show_news" in st.session_state):
-    st.session_state.show_news = True
+    st.session_state.show_news = False
 
 if st.session_state.show_news:
     new_features(
